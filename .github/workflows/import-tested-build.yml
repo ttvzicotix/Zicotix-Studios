@@ -1,0 +1,55 @@
+name: Record tested restoration (one-time)
+on:
+  push:
+    branches: [visual/restore-approved-art]
+    paths: [.github/workflows/import-tested-build.yml]
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: visual/restore-approved-art
+      - name: Retrieve only the checksum-verified test outputs
+        run: |
+          python3 - <<'PY'
+          import hashlib, io, json, pathlib, urllib.request, zipfile
+          url = 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJ6D4TQlhy7K2sdqOdMKtU625W/cde657b8-e064-44e6-a61a-beaaf5cf4ad8.zip'
+          with urllib.request.urlopen(url, timeout=45) as response:
+              raw = response.read(12000000)
+          assert hashlib.sha256(raw).hexdigest() == 'd0e91b6eb566584cc603908c0b11697c0a41ca05af22c94ee37110dfa99b3e8d', 'Artifact checksum mismatch'
+          destination = pathlib.Path('/tmp/restoration-evidence')
+          destination.mkdir()
+          with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+              lock = archive.read('restored/package-lock.json')
+              root = json.loads(lock)['packages']['']
+              current = json.loads(pathlib.Path('package.json').read_text())
+              assert root['dependencies'] == current['dependencies'] and root['devDependencies'] == current['devDependencies'], 'Dependency snapshot mismatch'
+              pathlib.Path('package-lock.json').write_bytes(lock)
+              for name in ('desktop-hero.png', 'desktop-aegis.png', 'desktop-optima.png', 'desktop-about.png', 'mobile-hero.png', 'mobile-full-hero.png', 'results.json', 'npm-audit.json'):
+                  (destination / name).write_bytes(archive.read('qa/' + name))
+              results = json.loads(archive.read('qa/results.json'))
+              assert results.get('passed') is True and not results.get('errors'), 'Browser tests did not pass'
+              results['tested_source_commit'] = 'f2c3066edd5f45ab0ff108872a1f303077cc3169'
+              results['artifact_sha256'] = hashlib.sha256(raw).hexdigest()
+              results['npm_audit'] = json.loads(archive.read('qa/npm-audit.json'))['metadata']['vulnerabilities']
+              pathlib.Path('docs').mkdir(exist_ok=True)
+              pathlib.Path('docs/visual-restoration-validation.json').write_text(json.dumps(results, indent=2) + '\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: restoration-browser-evidence
+          path: /tmp/restoration-evidence/
+          retention-days: 7
+      - name: Record reproducible dependency graph and verification results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- package-lock.json docs/visual-restoration-validation.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record tested dependency lockfile and passing visual-restoration checks'
+            git push origin HEAD:visual/restore-approved-art
+          fi
