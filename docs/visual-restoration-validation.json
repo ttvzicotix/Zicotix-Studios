@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "Approved SVG silhouette restored",
+    "Same-origin approved hero image loaded",
+    "Hero art fills viewport",
+    "WebGL rain canvas is transparent",
+    "Atmosphere pause/resume works",
+    "Aegis, Optima and About original images loaded",
+    "Desktop has no horizontal overflow; contact link preserved",
+    "390px touch layout, menu and navigation work without overflow",
+    "Reduced-motion fallback preserves artwork and text without WebGL",
+    "No horizontal overflow at 320, 760, 1024 and 1920px"
+  ],
+  "errors": [],
+  "passed": true,
+  "tested_source_commit": "f2c3066edd5f45ab0ff108872a1f303077cc3169",
+  "artifact_sha256": "d0e91b6eb566584cc603908c0b11697c0a41ca05af22c94ee37110dfa99b3e8d",
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  }
+}
