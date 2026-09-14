@@ -1,0 +1,22 @@
+{
+  "source": "Previously approved Zicotix portfolio v2 artwork; no regeneration or screenshot crops",
+  "archive_sha256": "00f048474cda2d7037ca4266255a99fe024858340a76e318b6b6ba69ed6ba9da",
+  "files": {
+    "hero.webp": {
+      "sha256": "c38ebc42825d60143dbb01231fee25ce1d3bf56f153037e127d2ca123ec263f4",
+      "bytes": 123742
+    },
+    "aegis.webp": {
+      "sha256": "9f4a73ae671e32d569234f890136cc266e727e8b12cd53bd0b79af03feda6283",
+      "bytes": 103526
+    },
+    "optima.webp": {
+      "sha256": "057c03d09757fc23c2bc38d09f2298701941c05c8819fd3d4854b5a46c857cfb",
+      "bytes": 82316
+    },
+    "about.webp": {
+      "sha256": "465e43bc920b0a6e17441a7925aa4b8419081fe61ac6c62fe2402c6820569d03",
+      "bytes": 86514
+    }
+  }
+}
