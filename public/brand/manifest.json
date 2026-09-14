@@ -1,0 +1,39 @@
+{
+  "logo": "Exact vector from public/art/z-mark.svg",
+  "profile": "1024x1024 with a circle-safe central mark",
+  "youtube": "2560x1440; central lockup kept inside the conservative safe area",
+  "wide": "1500x500 optional wide banner; review each platform crop",
+  "generatedAt": "2026-09-14T08:56:47.322Z",
+  "files": {
+    "zicotix-logo-purple-transparent.png": {
+      "width": 2048,
+      "height": 2048,
+      "bytes": 41910
+    },
+    "zicotix-logo-white-transparent.png": {
+      "width": 2048,
+      "height": 2048,
+      "bytes": 41649
+    },
+    "zicotix-profile-1024.png": {
+      "width": 1024,
+      "height": 1024,
+      "bytes": 649986
+    },
+    "zicotix-social-preview-1200x630.png": {
+      "width": 1200,
+      "height": 630,
+      "bytes": 797184
+    },
+    "zicotix-wide-banner-1500x500.png": {
+      "width": 1500,
+      "height": 500,
+      "bytes": 795306
+    },
+    "zicotix-youtube-banner-2560x1440.png": {
+      "width": 2560,
+      "height": 1440,
+      "bytes": 2916179
+    }
+  }
+}
