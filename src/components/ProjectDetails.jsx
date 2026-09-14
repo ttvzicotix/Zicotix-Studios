@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import Dialog from './Dialog.jsx'
 import { projectDetails } from '../data/site.js'
+import ShareProjectLink from './ShareProjectLink.jsx'
 
 export default function ProjectDetails({ id, onClose, onContact }) {
   const project = projectDetails[id]
@@ -28,6 +29,7 @@ export default function ProjectDetails({ id, onClose, onContact }) {
       {tab === 'Workflow' && <><p className="example-question">{project.example}</p><ol className="workflow-list">{project.workflow.map(([title, body], index) => <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}</ol><p className="fine-print">{project.exampleNote}</p></>}
       {tab === 'Direction' && <><h3>Where it is heading</h3><ul className="roadmap-list">{project.roadmap.map((item) => <li key={item}>{item}</li>)}</ul><p className="scope-note">{project.boundaries}</p><div className="tags detail-tags">{project.tech.map((item) => <span key={item}>{item}</span>)}</div></>}
     </section>
+    <ShareProjectLink projectId={id} />
     <div className="dialog-actions"><button type="button" className="pill pill-primary" onClick={() => onContact(project.name)}>Talk about {project.name}<span aria-hidden="true">↗</span></button>{project.link && <a href={project.link.url} target="_blank" rel="noopener noreferrer" className="text-link">{project.link.label}<span aria-hidden="true">↗</span></a>}</div>
   </Dialog>
 }
