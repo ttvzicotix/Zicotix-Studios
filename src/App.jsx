@@ -11,6 +11,7 @@ import ContactForm from './components/ContactForm.jsx'
 import StudioDetails from './components/StudioDetails.jsx'
 import SocialLinks from './components/SocialLinks.jsx'
 import FAQ from './components/FAQ.jsx'
+import BrandKit from './components/BrandKit.jsx'
 import { site } from './data/site.js'
 import { copyText } from './lib/contact.js'
 
@@ -221,11 +222,12 @@ function Contact({ onContact }) {
   )
 }
 
-function Footer() {
+function Footer({ onBrand }) {
   return (
     <footer className="footer"><Logo />
-      <div className="footer-links"><a href="#work">Work</a><a href="#about">Studio</a><a href="#questions">FAQ</a><a href="/brand/zicotix-logo-white-transparent.png" download>Logo PNG</a><a href="#top" aria-label="Back to top">Back to top ↑</a></div>
-      <p>Building a more intelligent tomorrow.<br />© {new Date().getFullYear()} Zicotix.</p>
+      <div className="footer-links"><a href="#work">Work</a><a href="#about">Studio</a><a href="#questions">FAQ</a><button type="button" className="footer-brand-button" onClick={onBrand} aria-haspopup="dialog">Brand kit ↗</button><a href="/brand/zicotix-logo-white-transparent.png" download>Logo PNG</a><a href="#top" aria-label="Back to top">Back to top ↑</a></div>
+      <p>Building a more intelligent tomorrow.<br />© {new Date().getFullYear()} Zicotix.<span className="release-tag">PORTFOLIO / SEPTEMBER 2026</span></p>
+      <div className="footer-connect"><span>Follow the build</span><SocialLinks /></div>
     </footer>
   )
 }
@@ -233,12 +235,15 @@ function Footer() {
 export default function App() {
   const app = useRef()
   const [panel, setPanel] = useState(() => {
-    const project = new URLSearchParams(window.location.search).get('project')
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('panel') === 'brand') return 'brand'
+    const project = params.get('project')
     return ['aegis', 'optima'].includes(project) ? project : null
   })
   const closePanel = () => {
     const url = new URL(window.location.href)
     url.searchParams.delete('project')
+    url.searchParams.delete('panel')
     window.history.replaceState(window.history.state, '', url)
     setPanel(null)
   }
@@ -273,9 +278,10 @@ export default function App() {
         </section>
         <FocusAreas /><About onStory={() => setPanel('studio')} /><FAQ onContact={openContact} /><Contact onContact={openContact} />
       </main>
-      <Footer />
+      <Footer onBrand={() => setPanel('brand')} />
       {(panel === 'aegis' || panel === 'optima') && <ProjectDetails key={panel} id={panel} onClose={closePanel} onContact={openContact} />}
       {panel === 'studio' && <StudioDetails onClose={closePanel} onContact={openContact} />}
+      {panel === 'brand' && <BrandKit onClose={closePanel} />}
       {panel === 'contact' && <ContactForm topic={contactTopic} onClose={closePanel} />}
     </div>
   )

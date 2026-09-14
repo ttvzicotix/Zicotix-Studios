@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "checks": [
+    "All four social buttons render in Contact and Footer with correct icons and configured URLs",
+    "Brand library categories, previews, PNG download event and every PNG/JPEG/SVG/ZIP URL pass",
+    "Brand dialog deep link, focus trapping, Escape and trigger-focus return pass",
+    "No page or brand-dialog horizontal overflow at 320-1920px",
+    "iPhone touch emulation: navigation, Aegis tabs, asset library and on-page contact remain usable",
+    "Original artwork and rain retained; atmosphere pause works"
+  ],
+  "errors": [],
+  "checkedAt": "2026-09-14T09:38:31.693Z",
+  "limitations": [
+    "Instagram @zicotixai is owner-reported candidate, not confirmed ownership",
+    "FormSubmit activation and real inbox delivery remain pending",
+    "Touch emulation is not physical iPhone Safari testing"
+  ],
+  "regression": [
+    "Aegis/Optima title line-height and description clearance >=10px",
+    "All four unchanged approved artwork images load",
+    "Project details, three tabs, arrow-key switching, focus trapping, Escape and focus restoration",
+    "Project-to-contact transition preselects correct subject",
+    "Founder story is reachable and detailed",
+    "Contact success simulated only: required fields, consent, single submit, explicit service acceptance",
+    "Contact rejection preserves draft and never claims delivery",
+    "Native FAQ opens without a framework or network request",
+    "Public GitHub link and downloadable PNG resolve",
+    "No page or project-dialog horizontal overflow at 320/375/390/430/760/768/1024/1440/1920px; 44px close targets",
+    "iPhone 13 emulation: touch menu, project panel, contact panel, 16px form inputs; reduced-motion static fallback",
+    "WebGL rain remains present and pause/resume still works"
+  ],
+  "npmAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "baseCommit": "46faf1ebbd75b7e30116189bf6008e779f0c794c",
+  "brandArchiveBytes": 6511118,
+  "brandArchiveSha256": "5648cb35838025ca1787ff75064e4001924661153eb379b2647d8dc2d600cf82",
+  "brandArchiveVerified": "Python zipfile read all 21 members and compared their bytes with source files"
+}

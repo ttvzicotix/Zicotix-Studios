@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node scripts/package-brand.mjs && vite build",
+    "preview": "vite preview",
+    "brand:package": "node scripts/package-brand.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
