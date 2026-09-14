@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react'
 import { useReducedMotion, useSceneVisibility } from './hooks/useMotionPreference.js'
 import './restoration.css'
 import './polish.css'
+import './enhancements.css'
 import ProjectDetails from './components/ProjectDetails.jsx'
 import ContactForm from './components/ContactForm.jsx'
 import StudioDetails from './components/StudioDetails.jsx'
@@ -46,22 +47,31 @@ function Logo() {
 
 function Navbar({ onContact }) {
   const [open, setOpen] = useState(false)
+  const navRef = useRef(null)
+  const menuRef = useRef(null)
   const links = [['Work', '#work'], ['Aegis', '#aegis'], ['Optima', '#optima'], ['Studio', '#about'], ['FAQ', '#questions'], ['Contact', '#contact']]
   useEffect(() => {
     const close = () => setOpen(false)
-    const onKey = (event) => { if (event.key === 'Escape') close() }
-    window.addEventListener('resize', close)
+    const desktop = window.matchMedia('(min-width: 1101px)')
+    const onBreakpoint = () => { if (desktop.matches) close() }
+    const onKey = (event) => {
+      if (event.key === 'Escape' && navRef.current?.contains(document.activeElement)) { close(); menuRef.current?.focus() }
+    }
+    const onOutside = (event) => { if (!navRef.current?.contains(event.target)) close() }
+    desktop.addEventListener('change', onBreakpoint)
     window.addEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onOutside)
     return () => {
-      window.removeEventListener('resize', close)
+      desktop.removeEventListener('change', onBreakpoint)
       window.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onOutside)
     }
   }, [])
   return (
-    <header className="nav-shell">
+    <header className="nav-shell" ref={navRef}>
       <nav className="nav" aria-label="Primary navigation">
         <Logo />
-        <button className="menu-button" aria-expanded={open} aria-controls="primary-links" aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen((v) => !v)}>
+        <button ref={menuRef} className="menu-button" aria-expanded={open} aria-controls="primary-links" aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen((v) => !v)}>
           <span /><span />
         </button>
         <div id="primary-links" className={`nav-links ${open ? 'is-open' : ''}`}>
@@ -74,13 +84,13 @@ function Navbar({ onContact }) {
   )
 }
 
-function Hero() {
+function Hero({ suspended = false }) {
   const section = useRef()
   const drift = useRef()
   const reduced = useReducedMotion()
   const visible = useSceneVisibility(section)
   const [paused, setPaused] = useState(false)
-  const moving = !reduced && !paused
+  const moving = !reduced && !paused && !suspended
 
   useEffect(() => {
     const target = section.current
@@ -222,7 +232,16 @@ function Footer() {
 
 export default function App() {
   const app = useRef()
-  const [panel, setPanel] = useState(null)
+  const [panel, setPanel] = useState(() => {
+    const project = new URLSearchParams(window.location.search).get('project')
+    return ['aegis', 'optima'].includes(project) ? project : null
+  })
+  const closePanel = () => {
+    const url = new URL(window.location.href)
+    url.searchParams.delete('project')
+    window.history.replaceState(window.history.state, '', url)
+    setPanel(null)
+  }
   const [contactTopic, setContactTopic] = useState('General enquiry')
   const openContact = (topic = 'General enquiry') => { setContactTopic(topic); setPanel('contact') }
   useGSAP(() => {
@@ -247,7 +266,7 @@ export default function App() {
     <div className="app" ref={app}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar onContact={openContact} />
-      <main id="main"><Hero />
+      <main id="main"><Hero suspended={panel !== null} />
         <section className="work" id="work">
           <div className="work-heading" data-reveal><p className="kicker"><span className="line" /> S E L E C T E D &nbsp; P R O J E C T S</p><span>Big ideas.<br />Real systems.</span></div>
           {projects.map((project, i) => <ProjectSection key={project.id} project={project} index={i} onDetails={setPanel} />)}
@@ -255,9 +274,9 @@ export default function App() {
         <FocusAreas /><About onStory={() => setPanel('studio')} /><FAQ onContact={openContact} /><Contact onContact={openContact} />
       </main>
       <Footer />
-      {(panel === 'aegis' || panel === 'optima') && <ProjectDetails key={panel} id={panel} onClose={() => setPanel(null)} onContact={openContact} />}
-      {panel === 'studio' && <StudioDetails onClose={() => setPanel(null)} onContact={openContact} />}
-      {panel === 'contact' && <ContactForm topic={contactTopic} onClose={() => setPanel(null)} />}
+      {(panel === 'aegis' || panel === 'optima') && <ProjectDetails key={panel} id={panel} onClose={closePanel} onContact={openContact} />}
+      {panel === 'studio' && <StudioDetails onClose={closePanel} onContact={openContact} />}
+      {panel === 'contact' && <ContactForm topic={contactTopic} onClose={closePanel} />}
     </div>
   )
 }

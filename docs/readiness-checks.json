@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "Both shareable project URLs open the correct details; copy and close work",
+    "Unknown project parameters ignored",
+    "Phone toolbar resize, touch navigation, contact panel and short landscape viewport pass",
+    "Hero atmosphere suspended behind open dialog"
+  ],
+  "errors": [],
+  "passed": true,
+  "testedAt": "2026-09-14T09:09:05.132Z",
+  "limitations": [
+    "Chromium with touch emulation; not physical iPhone Safari",
+    "Form delivery not sent or verified by this test"
+  ]
+}
