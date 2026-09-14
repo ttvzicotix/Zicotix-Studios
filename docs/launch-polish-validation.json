@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "checks": [
+    "Aegis/Optima title line-height and description clearance >=10px",
+    "All four unchanged approved artwork images load",
+    "Project details, three tabs, arrow-key switching, focus trapping, Escape and focus restoration",
+    "Project-to-contact transition preselects correct subject",
+    "Founder story is reachable and detailed",
+    "Contact success simulated only: required fields, consent, single submit, explicit service acceptance",
+    "Contact rejection preserves draft and never claims delivery",
+    "Native FAQ opens without a framework or network request",
+    "Public GitHub link and downloadable PNG resolve",
+    "No page or project-dialog horizontal overflow at 320/375/390/430/760/768/1024/1440/1920px; 44px close targets",
+    "iPhone 13 emulation: touch menu, project panel, contact panel, 16px form inputs; reduced-motion static fallback",
+    "WebGL rain remains present and pause/resume still works"
+  ],
+  "errors": [],
+  "contactEndToEnd": "NOT VERIFIED: simulated response tests only; one real setup POST was blocked with HTTP 403",
+  "mobileScope": "Chromium touch/device emulation, not physical iPhone Safari",
+  "testedAt": "2026-09-14T08:57:21.348Z",
+  "npmAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "baseCommit": "5abdbdeba673bc1deb79fb3f103f9cbd71696c0f",
+  "sourceFiles": {
+    "src/App.jsx": "67f3e1de87c2d2fd037c74271aa44f8225d4716ee7291ece5ac7b8bc9f205e6e",
+    "src/main.jsx": "529ef19f3afdc8c4bf3f49d1c88e14204e27ec3bc65565431c995127943b26aa",
+    "src/restoration.css": "a4a0a6ffc550887dc14ee8331ed310e2fe20a0168961497e9e621d45b2cc2229",
+    "src/styles.css": "ff9268e521f9dbfac8ff12330e84a5f15757b64d9e7d066c19302421a2bba891",
+    "src/polish.css": "52cefb17f048ddaa7d70b9f130136973991a126ecacec6e0f101f37d96d828ef",
+    "src/hooks/useMotionPreference.js": "57cf8099048d0fe9308c0d679052c15fb41619db452b40f6f1bb17e7d33755f1",
+    "src/scene/Experience.jsx": "c0e22dd471c8c2016f8f77675c6e15d290dab97f3a97b38631bea9f4bd56257b",
+    "src/components/Dialog.jsx": "d0ad30bfeb411a568cc1d0e4ad3805f34368498768217972acd6af520dd28d89",
+    "src/components/ProjectDetails.jsx": "2e243a6c94485b85fe3c0506700423c9b49db422443235a2bf793288ec2625dc",
+    "src/components/SocialLinks.jsx": "58530faaaeaa3f2bf2650765570984eb2fe81e2d15b7219088d0decd06621140",
+    "src/components/ContactForm.jsx": "1bec05e8fb4a71401cc14822edb2dc4ed6c6a0b0b28ddf46ee19819fe8b21c2f",
+    "src/components/StudioDetails.jsx": "22c334af897c0b7aeee7f1ebdff6cded5d7ffa88f2298461da6b987cc9a6f1fb",
+    "src/components/FAQ.jsx": "96bc3e4cd0cb48c6fdf95f31eaedf3070e522e4c956db9c036c148e8e2cfcc9f",
+    "src/data/site.js": "a708df9d8117687ae86cbd83516dcbbca124309bb62591528a29f1bcc34d8098",
+    "src/lib/contact.js": "992f638a576c3bf128d07a3c2ab2f795619e7a7604d72e46b05900ab184c0f83"
+  }
+}

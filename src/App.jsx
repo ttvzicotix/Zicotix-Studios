@@ -4,6 +4,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { useReducedMotion, useSceneVisibility } from './hooks/useMotionPreference.js'
 import './restoration.css'
+import './polish.css'
+import ProjectDetails from './components/ProjectDetails.jsx'
+import ContactForm from './components/ContactForm.jsx'
+import StudioDetails from './components/StudioDetails.jsx'
+import SocialLinks from './components/SocialLinks.jsx'
+import FAQ from './components/FAQ.jsx'
+import { site } from './data/site.js'
+import { copyText } from './lib/contact.js'
 
 const Experience = lazy(() => import('./scene/Experience.jsx'))
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -19,7 +27,7 @@ const projects = [
   {
     id: 'optima', number: '02', title: 'Optima',
     eyebrow: 'Decision Intelligence & Optimization',
-    description: 'Optimization tools that turn real-world constraints into transparent recommendations for location, allocation, routing, scheduling, and more.',
+    description: 'Visual decision support for real-world constraints. Starting with facility location, with routing, allocation, and scheduling on the roadmap.',
     tags: ['Operations Research', 'Decision Support', 'Optimization'],
   },
 ]
@@ -36,9 +44,9 @@ function Logo() {
   )
 }
 
-function Navbar() {
+function Navbar({ onContact }) {
   const [open, setOpen] = useState(false)
-  const links = [['Work', '#work'], ['Aegis', '#aegis'], ['Projects', '#work'], ['About', '#about'], ['Contact', '#contact']]
+  const links = [['Work', '#work'], ['Aegis', '#aegis'], ['Optima', '#optima'], ['Studio', '#about'], ['FAQ', '#questions'], ['Contact', '#contact']]
   useEffect(() => {
     const close = () => setOpen(false)
     const onKey = (event) => { if (event.key === 'Escape') close() }
@@ -59,8 +67,9 @@ function Navbar() {
         <div id="primary-links" className={`nav-links ${open ? 'is-open' : ''}`}>
           {links.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}
         </div>
-        <a className="pill nav-cta" href="#contact">Let's Build <span>→</span></a>
+        <button type="button" className="pill nav-cta" onClick={() => onContact('Project collaboration')}>Let's Build <span aria-hidden="true">↗</span></button>
       </nav>
+      <div className="reading-progress" aria-hidden="true" />
     </header>
   )
 }
@@ -130,7 +139,7 @@ function Hero() {
   )
 }
 
-function ProjectSection({ project, index }) {
+function ProjectSection({ project, index, onDetails }) {
   return (
     <article className={`project project-${project.id}`} id={project.id} aria-labelledby={`${project.id}-title`}>
       <div className="project-art" aria-hidden="true">
@@ -142,7 +151,7 @@ function ProjectSection({ project, index }) {
           <h2 id={`${project.id}-title`}>{project.title}</h2>
           <p className="project-eyebrow">{project.eyebrow}</p>
           <p className="project-description">{project.description}</p>
-          <a className="text-link" href="#contact" aria-label={`Learn more about ${project.title}`}>Learn more <span>→</span></a>
+          <button type="button" className="text-link" onClick={() => onDetails(project.id)} aria-haspopup="dialog" aria-label={`Learn more about ${project.title}`}>Explore {project.title}<span aria-hidden="true">↗</span></button>
           <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
         </div>
       </div>
@@ -166,7 +175,7 @@ function FocusAreas() {
   )
 }
 
-function About() {
+function About({ onStory }) {
   return (
     <section className="about section" id="about">
       <div className="about-art" aria-hidden="true"><img src={art('about')} width="1715" height="864" alt="" loading="lazy" decoding="async" draggable="false" /></div>
@@ -175,7 +184,7 @@ function About() {
           <p className="kicker"><span className="line" /> A B O U T &nbsp; Z I C O T I X</p>
           <h2>A smaller, more ambitious kind of studio.</h2>
           <p>Zicotix explores what's possible at the intersection of intelligent software, automation, analytics, and human judgment. The focus is simple: build systems that are useful, understandable, and worth trusting.</p>
-          <a className="pill" href="#contact">Our Story <span>→</span></a>
+          <button type="button" className="pill" onClick={onStory} aria-haspopup="dialog">Meet the builder <span aria-hidden="true">↗</span></button>
         </div>
         <div className="about-stat" data-reveal><strong>2+</strong><span>Flagship Projects</span></div>
         <div className="about-stat" data-reveal><strong>∞</strong><span>Bigger Things Ahead</span></div>
@@ -185,19 +194,27 @@ function About() {
   )
 }
 
-function Contact() {
+function Contact({ onContact }) {
+  const [copied, setCopied] = useState('')
+  const copy = async () => {
+    try { await copyText(site.email); setCopied('Email copied') }
+    catch { setCopied('Select the address below to copy it') }
+  }
   return (
-    <section className="contact section" id="contact"><div className="contact-panel" data-reveal>
-      <div><p className="kicker">G E T &nbsp; I N &nbsp; T O U C H</p><h2>Let's build what's next.</h2><p>Have an idea, a question, or want to collaborate? Start the conversation.</p></div>
-      <a className="pill pill-primary" href="mailto:zicotixai@protonmail.com">Send a Message <span>→</span></a>
-    </div></section>
+    <section className="contact section" id="contact" aria-labelledby="contact-title">
+      <div className="contact-panel" data-reveal>
+        <div><p className="kicker">GET IN TOUCH</p><h2 id="contact-title">Let's build what's next.</h2><p>A useful idea. A better workflow. An opportunity to build something together.</p><p className="contact-person">Andrew Gungoll <span aria-hidden="true">/</span> Builder behind Zicotix</p></div>
+        <div className="contact-actions"><button type="button" className="pill pill-primary" onClick={() => onContact('General enquiry')} aria-haspopup="dialog">Start a conversation <span aria-hidden="true">↗</span></button><button type="button" className="copy-email" onClick={copy}>Copy email address</button><span className="copy-status" role="status">{copied}</span></div>
+      </div>
+      <div className="contact-baseline"><span className="direct-email">{site.email}</span><SocialLinks /></div>
+    </section>
   )
 }
 
 function Footer() {
   return (
     <footer className="footer"><Logo />
-      <div className="footer-links"><a href="#work">Work</a><a href="#aegis">Aegis</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+      <div className="footer-links"><a href="#work">Work</a><a href="#about">Studio</a><a href="#questions">FAQ</a><a href="/brand/zicotix-logo-white-transparent.png" download>Logo PNG</a><a href="#top" aria-label="Back to top">Back to top ↑</a></div>
       <p>Building a more intelligent tomorrow.<br />© {new Date().getFullYear()} Zicotix.</p>
     </footer>
   )
@@ -205,6 +222,9 @@ function Footer() {
 
 export default function App() {
   const app = useRef()
+  const [panel, setPanel] = useState(null)
+  const [contactTopic, setContactTopic] = useState('General enquiry')
+  const openContact = (topic = 'General enquiry') => { setContactTopic(topic); setPanel('contact') }
   useGSAP(() => {
     const media = gsap.matchMedia()
     media.add('(prefers-reduced-motion: no-preference)', () => {
@@ -214,6 +234,7 @@ export default function App() {
           scrollTrigger: { trigger: el, start: 'top 92%', once: true },
         })
       })
+      gsap.fromTo('.reading-progress', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } })
       gsap.to('.hero-art-scroll', { yPercent: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 } })
       gsap.utils.toArray('.project-art img').forEach((image) => {
         gsap.fromTo(image, { yPercent: -1.5 }, { yPercent: 1.5, ease: 'none', scrollTrigger: { trigger: image.closest('.project'), start: 'top bottom', end: 'bottom top', scrub: 1 } })
@@ -225,15 +246,18 @@ export default function App() {
   return (
     <div className="app" ref={app}>
       <a className="skip-link" href="#main">Skip to content</a>
-      <Navbar />
+      <Navbar onContact={openContact} />
       <main id="main"><Hero />
         <section className="work" id="work">
           <div className="work-heading" data-reveal><p className="kicker"><span className="line" /> S E L E C T E D &nbsp; P R O J E C T S</p><span>Big ideas.<br />Real systems.</span></div>
-          {projects.map((project, i) => <ProjectSection key={project.id} project={project} index={i} />)}
+          {projects.map((project, i) => <ProjectSection key={project.id} project={project} index={i} onDetails={setPanel} />)}
         </section>
-        <FocusAreas /><About /><Contact />
+        <FocusAreas /><About onStory={() => setPanel('studio')} /><FAQ onContact={openContact} /><Contact onContact={openContact} />
       </main>
       <Footer />
+      {(panel === 'aegis' || panel === 'optima') && <ProjectDetails key={panel} id={panel} onClose={() => setPanel(null)} onContact={openContact} />}
+      {panel === 'studio' && <StudioDetails onClose={() => setPanel(null)} onContact={openContact} />}
+      {panel === 'contact' && <ContactForm topic={contactTopic} onClose={() => setPanel(null)} />}
     </div>
   )
 }

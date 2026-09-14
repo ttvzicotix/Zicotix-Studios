@@ -30,3 +30,42 @@ npm run preview
 This repository contains only the public portfolio frontend. It does not include private Aegis or Optima implementation, credentials, provider keys or private infrastructure details. Contact uses the owner's brand email. The displayed products describe projects, not a checkout or hosted agent service.
 
 See `docs/visual-restoration-validation.json` for the tested source revision, browser checks and dependency audit snapshot. A passing build is not a guarantee of performance on every physical device; review real iPhone/Android devices before making device-specific performance claims.
+
+
+## September launch polish
+
+Project buttons now open accessible details with Overview / Workflow / Direction tabs.
+The Studio panel introduces Andrew. The Contact CTA opens an in-page form, not a mail app.
+The approved artwork and rain layer are unchanged. Header descenders have dedicated clearance.
+
+### Contact delivery: ACTION REQUIRED
+The form submits through https://formsubmit.co/ajax/zicotixai@protonmail.com.
+It has required fields, consent, timeout handling, a honeypot, draft-copy fallback and no automatic retries.
+FormSubmit requires one-time destination inbox activation. One setup POST from the test environment
+was refused with HTTP 403; no activation email or inbox delivery was confirmed.
+
+Open the live form, submit your own clearly labeled test, confirm FormSubmit's verification message
+in the destination Proton inbox, and verify that a second test arrives. Only then change
+`contactDeliveryVerified` in `src/data/site.js` to true. The visible setup notice deliberately stays
+until actual delivery is verified. Browser tests intercept form requests; they DO NOT prove inbox delivery.
+Do not add secrets, disable provider security to bypass a refusal, or claim delivery from HTTP 200 alone.
+
+### Social profiles
+GitHub comes from the connected owner. TikTok @zicotixai was supplied by Andrew.
+Instagram and the original YouTube URL are intentionally absent until their exact addresses are confirmed.
+Add entries to `src/data/site.js` and the corresponding icon in `SocialLinks.jsx` when confirmed.
+Social profile images/banners are export files only; no accounts were changed.
+
+### Brand exports
+The `public/brand/` directory contains transparent PNG logos, a square profile image,
+a 2560x1440 YouTube banner, a wide banner and an Open Graph preview. No font files are distributed.
+The SVG silhouette and all four original scene images remain unchanged.
+
+### Validation
+`docs/launch-polish-validation.json` records tests and known limitations.
+`qa/check.cjs` runs against an already-built preview server and uses the Playwright package supplied by the test environment.
+Physical iPhone Safari testing remains an owner check. There is no Framer source import claimed.
+
+### Future shop
+`shopUrl` is intentionally null. There is no payment collection, paid package download or fake purchase button.
+The planned bundle is described as forthcoming; add an external storefront only when it is ready.
