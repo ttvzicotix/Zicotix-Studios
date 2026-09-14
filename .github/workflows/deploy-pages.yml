@@ -17,25 +17,43 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install locked dependencies
+        run: npm ci --no-fund
+
+      - name: Check dependency advisories
+        run: npm audit --audit-level=high
+
+      - name: Verify approved artwork
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path('public/art')
+          manifest = json.loads((root / 'provenance.json').read_text())
+          for name, expected in manifest['files'].items():
+              content = (root / name).read_bytes()
+              assert hashlib.sha256(content).hexdigest() == expected['sha256'], f'Artwork changed: {name}'
+              assert len(content) == expected['bytes'], f'Artwork size changed: {name}'
+          print('All four approved images match their recorded source bytes.')
+          PY
 
       - name: Build
         run: npm run build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -47,6 +65,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
     steps:
       - name: Deploy to GitHub Pages
