@@ -1,0 +1,14 @@
+{
+  "version": "2026-09-14",
+  "archive": "zicotix-brand-kit.zip",
+  "assets": [
+    {"id":"profile","category":"social","title":"Social profile","size":"1024 × 1024","description":"A circle-safe mark for YouTube, Instagram and TikTok.","preview":"previews/zicotix-profile-1024.webp","width":1024,"height":1024,"files":{"PNG":"zicotix-profile-1024.png","JPEG":"zicotix-profile-1024.jpg"}},
+    {"id":"youtube","category":"social","title":"YouTube channel banner","size":"2560 × 1440","description":"Centered identity with room for different device crops. Check the crop in YouTube Studio.","preview":"previews/zicotix-youtube-banner-2560x1440.webp","width":2560,"height":1440,"files":{"PNG":"zicotix-youtube-banner-2560x1440.png","JPEG":"zicotix-youtube-banner-2560x1440.jpg"}},
+    {"id":"wide","category":"social","title":"Wide social banner","size":"1500 × 500","description":"A wide landscape lockup. Preview the crop on your chosen platform.","preview":"previews/zicotix-wide-banner-1500x500.webp","width":1500,"height":500,"files":{"PNG":"zicotix-wide-banner-1500x500.png","JPEG":"zicotix-wide-banner-1500x500.jpg"}},
+    {"id":"preview","category":"social","title":"Link-preview artwork","size":"1200 × 630","description":"The share-card image for the Zicotix website.","preview":"previews/zicotix-social-preview-1200x630.webp","width":1200,"height":630,"files":{"PNG":"zicotix-social-preview-1200x630.png","JPEG":"zicotix-social-preview-1200x630.jpg"}},
+    {"id":"white-logo","category":"logos","title":"White Z mark","size":"2048 × 2048","description":"Transparent PNG for dark backgrounds. The JPEG has a near-black background.","preview":"zicotix-logo-white-transparent.png","width":2048,"height":2048,"files":{"PNG":"zicotix-logo-white-transparent.png","JPEG":"zicotix-logo-white-on-dark.jpg","SVG":"zicotix-logo.svg"}},
+    {"id":"purple-logo","category":"logos","title":"Purple Z mark","size":"2048 × 2048","description":"Transparent PNG for light backgrounds. The JPEG has a white background.","preview":"zicotix-logo-purple-transparent.png","width":2048,"height":2048,"files":{"PNG":"zicotix-logo-purple-transparent.png","JPEG":"zicotix-logo-purple-on-white.jpg"}}
+  ],
+  "documents":["README.txt","SOCIAL-BIOS.txt","palette.json","manifest.json","export-provenance.json","downloads.json"],
+  "extras":["zicotix-apple-touch-icon.png","zicotix-favicon-32.png"]
+}

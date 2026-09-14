@@ -1,0 +1,53 @@
+{
+  "source": "Existing approved PNG brand exports only; format conversion and thumbnails, no regeneration",
+  "files": {
+    "zicotix-profile-1024.jpg": {
+      "bytes": 142795,
+      "sha256": "15375e2087e87bf5f84504096c5b32c6e1364ae381f586bf3404f5fab803fb6c"
+    },
+    "previews/zicotix-profile-1024.webp": {
+      "bytes": 8640,
+      "sha256": "e0da8efe6874bbb279c7e13b9028ef5a631f790e86827ed9b1475b98856d21c0"
+    },
+    "zicotix-youtube-banner-2560x1440.jpg": {
+      "bytes": 527326,
+      "sha256": "9ec40b53dffdc3400ba41114c282b1343763121869339d50a478759274b02218"
+    },
+    "previews/zicotix-youtube-banner-2560x1440.webp": {
+      "bytes": 23066,
+      "sha256": "fa4c880a52611c083e3ab9057bb887022b70b3328353f772f9cb18fd1313860b"
+    },
+    "zicotix-wide-banner-1500x500.jpg": {
+      "bytes": 164498,
+      "sha256": "792e0d722054e7f4388fea488d370160909778ad4bbcc8efcaa77366f9ebbece"
+    },
+    "previews/zicotix-wide-banner-1500x500.webp": {
+      "bytes": 17266,
+      "sha256": "5be63476db9f043b360c02d45316e8c7570a754775751617ee7dd556481851fa"
+    },
+    "zicotix-social-preview-1200x630.jpg": {
+      "bytes": 204248,
+      "sha256": "3e57a0c1cdebcb8f34588ef230e52d3b06cbf2583d232ca67571de8ad67dbfb5"
+    },
+    "previews/zicotix-social-preview-1200x630.webp": {
+      "bytes": 30932,
+      "sha256": "1b19e07acd0b84070bccde529de057808ef9209ebb0e29dd67274a9de0039b94"
+    },
+    "zicotix-logo-white-on-dark.jpg": {
+      "bytes": 81675,
+      "sha256": "054ba4086017424a4f223e21167dcede5d1f3f320b83fba558202e7ff7de26d7"
+    },
+    "zicotix-logo-purple-on-white.jpg": {
+      "bytes": 106221,
+      "sha256": "4767a3836afe95111c0abc99984833221897935238bb58b639142ff17a712207"
+    },
+    "zicotix-apple-touch-icon.png": {
+      "bytes": 28798,
+      "sha256": "64f6bf4cafe4e9da992812dd757fdcdb92c4f67a6a556c8f9ba1adf4198e7bbb"
+    },
+    "zicotix-favicon-32.png": {
+      "bytes": 1761,
+      "sha256": "efa605bafa176a1139a2db12b2480c630052629e4aacf866250bf4d67da1d5ae"
+    }
+  }
+}

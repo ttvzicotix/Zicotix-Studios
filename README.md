@@ -52,8 +52,9 @@ Do not add secrets, disable provider security to bypass a refusal, or claim deli
 
 ### Social profiles
 GitHub comes from the connected owner. TikTok @zicotixai was supplied by Andrew.
-Instagram and the original YouTube URL are intentionally absent until their exact addresses are confirmed.
-Add entries to `src/data/site.js` and the corresponding icon in `SocialLinks.jsx` when confirmed.
+YouTube @Zicotix resolves to the original Gaming channel UCDU_CBpnuxuvTqcf0FKrPmg.
+Instagram uses the first owner-reported candidate @zicotixai; this is provisional and must be confirmed rather than treated as authenticated. Instagram lookup was rate-limited.
+All four social buttons are present in Contact, Studio and the footer.
 Social profile images/banners are export files only; no accounts were changed.
 
 ### Brand exports
@@ -69,3 +70,18 @@ Physical iPhone Safari testing remains an owner check. There is no Framer source
 ### Future shop
 `shopUrl` is intentionally null. There is no payment collection, paid package download or fake purchase button.
 The planned bundle is described as forthcoming; add an external storefront only when it is ready.
+
+## Brand library and downloads
+The footer's Brand kit button opens an accessible asset browser. Direct link: `/?panel=brand`.
+Individual PNG/JPEG/SVG files and optional draft bios are served from `/brand/`. `npm run build`
+first runs the dependency-free `scripts/package-brand.mjs` to package the catalog's allowlisted
+files into `/brand/zicotix-brand-kit.zip`. No font files or private code are packaged.
+
+JPEGs and gallery previews are deterministic format conversions of the existing PNG brand exports.
+The approved scene assets and navbar SVG are unchanged. White PNG logos retain transparency;
+white JPEG logos use near-black, and purple JPEG logos use white.
+
+### Remaining owner checks
+Confirm Instagram's exact handle; Metricool currently exposes an older account with no linked profiles.
+Activate FormSubmit from the Proton inbox and verify a real test message before removing the contact warning.
+Check the site on a physical iPhone; browser emulation is not hardware testing.

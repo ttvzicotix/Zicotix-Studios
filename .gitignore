@@ -4,3 +4,6 @@ dist/
 *.log
 .env
 .env.*
+public/brand/zicotix-brand-kit.zip
+qa/*-results.json
+qa/*.png

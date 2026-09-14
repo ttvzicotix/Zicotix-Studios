@@ -60,7 +60,7 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4174';
  await page.locator('#questions').scrollIntoViewIfNeeded();await page.locator('summary').first().click();assert(await page.getByText(/Both are active development projects/).isVisible());
  checks.push('Native FAQ opens without a framework or network request');
  await page.locator('#contact').scrollIntoViewIfNeeded();await page.screenshot({path:`${dir}/desktop-contact.png`});
- assert.equal(await page.getByRole('link',{name:/GitHub: ttvzicotix/}).getAttribute('href'),'https://github.com/ttvzicotix');
+ assert.equal(await page.locator('#contact').getByRole('link',{name:/GitHub: ttvzicotix/}).getAttribute('href'),'https://github.com/ttvzicotix');
  const logo=await page.request.get(`${base}/brand/zicotix-logo-white-transparent.png`);assert.equal(logo.status(),200);
  checks.push('Public GitHub link and downloadable PNG resolve');
  for(const width of [320,375,390,430,760,768,1024,1440,1920]){

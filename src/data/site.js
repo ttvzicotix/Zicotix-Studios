@@ -12,8 +12,8 @@ export const site = {
 export const socials = [
   { name: 'GitHub', handle: 'ttvzicotix', url: 'https://github.com/ttvzicotix', source: 'connected repository owner' },
   { name: 'TikTok', handle: '@zicotixai', url: 'https://www.tiktok.com/@zicotixai', source: 'owner-reported handle; not independently verified' },
-  // Instagram and the original YouTube channel: exact URLs await owner confirmation.
-  // Do not invent channel IDs or silently send visitors to another account.
+  { name: 'YouTube', handle: '@Zicotix', url: 'https://www.youtube.com/@Zicotix', source: 'Public channel metadata: UCDU_CBpnuxuvTqcf0FKrPmg; Zicotix title, Gaming keywords and montage history match owner description' },
+  { name: 'Instagram', handle: '@zicotixai', url: 'https://www.instagram.com/zicotixai/', source: 'Provisional: first handle supplied by owner; owner also mentioned zicotix. Instagram lookup rate-limited; owner confirmation pending', confirmed: false },
 ]
 export const projectDetails = {
   aegis: {
